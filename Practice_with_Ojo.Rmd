@@ -1,0 +1,62 @@
+---
+title: "practicesWithOjo"
+author: "Samuel Zakka Bako"
+date: "2/1/2020"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+cars <-datasets::mtcars
+
+```
+
+```{r}
+View(cars)
+```
+
+```{r}
+summary(cars)
+```
+```{r}
+car<-select(cars,am, cyl,mpg)
+```
+
+```{r}
+mota <- mutate(car, consumption = mpg * 0.425)
+```
+
+```{r}
+honda<-filter(mota,am ==0)
+```
+
+```{r}
+audi<-filter(mota,am ==1)
+```
+
+```{r}
+View(audi)
+```
+
+```{r}
+View(honda)
+```
+
+```{r}
+consump_av<-mutate(audi, av_consumption = mean(consumption))
+View(consump_av)
+```
+
+```{r}
+cosump_av<-as.data.frame(honda)
+```
+
+```{r}
+write.csv(honda, file ="honda.csv",row.names = TRUE)
+```
+

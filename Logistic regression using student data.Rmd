@@ -1,0 +1,28 @@
+---
+title: "Session10"
+author: "Samuel Zakka Bako"
+date: "11/28/2019"
+output: html_document 
+---
+
+```{r}
+dnt<-read.csv("C:/Users/SierraZuluBravo/Documents/R/sample.csv", header=T)
+dnt
+```
+
+```{r}
+mod1<-glm(hon~female+read+math,data = dnt, family = binomial)
+summary(mod1)$coeff
+```
+# female odds
+```{r}
+exp(.979948)
+```
+# read odds
+```{r}
+exp(.05906323)
+```
+# math odds
+```{r}
+exp(.12295888)
+```

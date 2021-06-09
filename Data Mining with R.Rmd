@@ -1,0 +1,27 @@
+---
+title: "Data Mining with R"
+author: "Samuel Zakka Bako"
+date: "3/16/2020"
+output: html_document
+---
+
+```{r}
+library('tidyverse')
+library('tidytext')
+library('scales')
+library('gutenbergr')
+library('janeaustenr')
+library('stringr')
+library('dplyr')
+library('ggplot2')
+```
+
+```{r}
+text <-c("Nobody, Absolute nobody", "Tayo: Flutter is the best language in the world", "All is well")
+text
+```
+
+```{r}
+text_tb <-tibble(line= 1:3, text = text)
+text_tb
+```

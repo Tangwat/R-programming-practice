@@ -1,0 +1,117 @@
+---
+title: "Data wrangling with R"
+author: "Samuel Zakka Bako"
+date: "8/28/2020"
+output: html_document
+---
+```{r}
+library("tidyverse")
+```
+
+
+```{r}
+trafficstops <- read.csv("C:/Users/SierraZuluBravo/Documents/Johnson_senetor/ms_statewide_2020_04_01.csv")
+head(trafficstops)
+```
+
+
+```{r}
+mean(trafficstops[trafficstops$county_name == "Clay County", "subject_age"], 
+     na.rm = TRUE)
+```
+
+```{r}
+mean(trafficstops[trafficstops$county_name == "Lee County", "subject_age"], 
+     na.rm = TRUE)
+```
+
+```{r}
+select(trafficstops, department_name, department_id, subject_race)
+```
+
+```{r}
+select(trafficstops, starts_with("subject"))
+```
+
+```{r}
+filter(trafficstops, county_name == "Yazoo County")
+```
+
+```{r}
+tmp_df <- filter(trafficstops, subject_age > 85)
+select(tmp_df, violation, subject_sex)
+```
+
+```{r}
+select(filter(trafficstops, subject_age > 65), violation, subject_sex)
+```
+
+```{r}
+trafficstops %>% 
+  filter(subject_age > 73) %>% 
+  select(violation, subject_sex)
+```
+
+```{r}
+senior_drivers <- trafficstops %>%
+  filter(subject_age > 45) %>%
+  select(violation, subject_sex, subject_race)
+
+senior_drivers
+```
+
+```{r}
+trafficstops %>% 
+  filter(county_name == "Tunica County") %>% 
+  select(date, subject_age, violation)
+```
+
+```{r}
+trafficstops %>% 
+mutate(birth_year = substring(date, 1, 4),
+       birth_year = as.factor(birth_year))
+```
+
+```{r}
+library(lubridate)
+
+trafficstops %>% 
+  mutate(birth_date = ymd(date),
+         birth_year = year(date)) %>% 
+  head()
+```
+
+```{r}
+trafficstops %>% 
+  mutate(birth_date = ymd(date),
+         birth_year = year(date),
+         birth_cohort = round(birth_year/10)*10) %>% 
+           head()
+```
+
+```{r}
+trafficstops %>% 
+  mutate(birth_date = ymd(date),
+         birth_year = year(date),
+         birth_cohort = round(birth_year/10)*10,
+         birth_cohort = factor(birth_cohort)) %>%
+    select(birth_cohort) %>% 
+    plot()
+```
+
+# split-apply-combine
+##group_by & summarize
+
+```{r}
+trafficstops %>%
+  group_by(subject_race) %>%
+  summarize(mean_age = mean(subject_age, na.rm=TRUE))
+```
+#group_by multiple columns
+
+```{r}
+trafficstops %>% 
+  group_by(county_name, subject_race) %>%
+  summarize(mean_age = mean(subject_age, na.rm=TRUE))
+```
+

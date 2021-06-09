@@ -1,0 +1,80 @@
+---
+title: "Section4"
+author: "Samuel Zakka Bako"
+date: "10/24/2019"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+dmd<-read.table("C:/Users/user/Desktop/R/Session3/data/diamond.csv", head = T, sep = ",")
+head(dmd)[,1:5]
+```
+
+```{r}
+ggplot(dmd, aes(x = carat, y = price))
+```
+
+```{r}
+ggplot(dmd, aes(x = carat, y = price))+
+geom_point()
+```
+
+```{r}
+ggplot(dmd, aes(x = carat, y = price,
+colour=cut))+geom_point()
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(readxl)
+library(tidyverse)
+dta<-read_excel("C:/Users/user/Desktop/R/Session3/data/mbta.xlsx", skip = 1,
+range = cell_cols(2:60))
+```
+
+```{r}
+dta_tidy1<-dta %>% gather(`2007-01`:'2011-10',
+                          key = "year", value = "passengers")
+dta_tidy1
+```
+
+```{r}
+dta_tidy2<-dta_tidy1 %>% separate(year, into = c("year", "month"))
+dta_tidy2
+```
+```{r}
+fil<-filter(dta_tidy2, mode %in% c("Commuter Rail","Heavy Rail", "Light Rail", "Private Bus"))
+fil
+```
+
+```{r}
+glimpse(fil)
+```
+
+```{r}
+fil$mode<-as.factor(fil$mode)
+fil$passengers<-as.numeric(fil$passengers)
+fil$year<-as.factor(fil$year)
+```
+
+```{r}
+g1<-ggplot(fil, aes(x=year, y= passengers))+geom_point(aes(colour=mode))
+g1
+```
+
+```{r}
+g2<-g1+labs(title = "passengers against year base mode", y= "Number of passengers", x = "year")
+g2
+```
+
+```{r}
+g2+theme_dark()
+```
+
+```{r}
+ggplot(dmd, aes(x = carat, y = price))+
+geom_point(aes(colour=cut,shape=cut, size=0.6))
+```
+```{r}
+glimpse(dmd)
+```

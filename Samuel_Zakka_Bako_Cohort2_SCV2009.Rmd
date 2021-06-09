@@ -1,0 +1,73 @@
+---
+title: "Test"
+author: "Samuel Zakka Bako"
+date: "10/18/2019"
+output: html_document
+---
+
+Qustion 1
+
+```{r}
+a <- c(2,3,4,5,5)
+a
+```
+
+Question 2
+
+```{r}
+a = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+
+b = matrix(c(0, 1, 2, 3, 0, 2), nrow = 2)
+
+sum = a + b
+
+Sutract = a - b
+
+
+multiply= a * b
+print(a)
+```
+Question 3
+```{r}
+a<- matrix(c(1:6), nrow = 3,ncol = 3, byrow = FALSE)
+a[2,3]
+```
+Question 4
+
+```{r}
+a <- vector("Numeric", length = 6)
+b <- vector("Chracter", length = 6)
+c <- vector("logical", length = 6)
+d <- vector("complex", length = 6)
+```
+```{r}
+a
+b
+c
+d
+```
+Question 5
+```{r}
+vector1 <- c(2:5)
+vectorn <- c(2:5)
+result <- vector1 * vectorn
+result
+```
+
+Qustion 6
+
+```{r}
+tumor = read.table(file.choose(),header = T)
+tumor
+```
+
+
+
+Question 7
+```{r}
+plot(tumor$futime, tumor$time, main = "A graph ", xlab = "futime", ylab = "time")
+```
+
+```{r}
+hist(tumor $ futime, main = "Histogram", xlab = "futime")
+```
